@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: TomonohSeima <TomonohSeima@student.42.f    +#+  +:+       +#+        */
+/*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/11/14 17:38:20 by TomonohSeim      ###   ########.fr       */
+/*   Updated: 2020/11/15 23:49:03 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	get_next_line (int fd, char **line)
 	if ((buf = malloc(BUFFER_SIZE + 1)) == NULL || fd <= -1)
 		return (-1);
 	*line = NULL;
-	//free(*line);
+	free(*line);
 	if (save)
 	{
 		*line = ft_strdup(save);

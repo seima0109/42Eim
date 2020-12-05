@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: TomonohSeima <TomonohSeima@student.42.f    +#+  +:+       +#+        */
+/*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:15:23 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/11/14 17:26:25 by TomonohSeim      ###   ########.fr       */
+/*   Updated: 2020/11/15 23:31:39 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
