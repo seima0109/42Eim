@@ -1,5 +1,4 @@
 #include "ft_printf.h"
-#include "libft.h"
 
 void print_type_c(info *test, unsigned char c, size_t *count)
 {
@@ -23,18 +22,17 @@ void print_type_s(info *test, char *str, size_t *count)
 	int len;
 
 	len = ft_strlen(str);
-	if (len > test->width)
-		len = test->width;
-	*count += test->mini != 0 ? test->mini : len; 
+	len = (len < test->width || test->width == -1) ? len : test->width;
+	*count += test->mini > len ? test->mini : len; 
 	if (test->flag != -1)
 	{
-		while (test->mini-- -len && test->mini > 0)
+		while (test->mini-- - len > 0 && test->mini > 0)
 			write(1, test->flag == 0 ? "0" : " ", 1);
 	}
 	write (1, str, len);
 	if (test->flag == -1)
 	{
-		while (test->mini-- -len && test->mini > 0)
+		while (test->mini-- - len > 0 && test->mini > 0)
 			write (1, " ", 1);
 	}
 	free(test);
