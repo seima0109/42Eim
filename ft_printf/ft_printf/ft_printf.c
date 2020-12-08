@@ -1,25 +1,24 @@
 #include "ft_printf.h"
-#include "libft.h"
 
-void	print_persent(info *test, va_list *ap, size_t *count)
+void		print_persent(info *test, va_list *ap, size_t *count)
 {
 	if (test->type == 'c')
 		print_type_c(test, va_arg(*ap, int), count);
 	else if (test->type == 's')
 		print_type_s(test, va_arg(*ap, char *), count);
 	else if (test->type == 'p')
-		print_type_p(test, (size_t)va_arg(*ap, void *), count);
+		print_type_p(test, (long)va_arg(*ap, void *), count);
 	else if (test->type == 'd' || test->type == 'i')
 		print_type_id(test, va_arg(*ap, int), count);
 	else if (test->type == 'u')
 		print_type_u(test, va_arg(*ap, unsigned int), count);
 	else if (test->type == 'x' || test->type == 'X')
-		print_type_xX(test, va_arg(*ap, int), count);
+		print_type_xX(test, va_arg(*ap, unsigned int), count);
 	else if (test->type == '%')
 		print_type_c(test, '%', count);
 }
 
-const char	*second_confirm(const char *format, va_list *ap, info *test, size_t *count)
+const char	*confirm_2(const char *format, va_list *ap, info *test, size_t *count)
 {
 	test->width = -1;
 	if (*format == '.')
@@ -34,21 +33,20 @@ const char	*second_confirm(const char *format, va_list *ap, info *test, size_t *
 			else
 				test->width = 0;
 		else
-		{ 
+		{
 			test->width = ft_atoi((char *)format);
 			while (ft_isdigit(*format))
 				format++;
 		}
 	}
+	if (!*format)
+		return (format);
 	test->type = *format++;
-	//
-	//printf("\nflag = %d width = %d mini = %d type = %c\n", test->flag, test->width, test->mini, test->type);
-	//
 	print_persent(test, ap, count);
 	return (format);
 }
 
-const char    *confirm(const char *format, va_list *ap, size_t *count)
+const char	*confirm(const char *format, va_list *ap, size_t *count)
 {
 	info *test;
 
@@ -79,10 +77,10 @@ const char    *confirm(const char *format, va_list *ap, size_t *count)
 		}
 		format++;
 	}
-	return (second_confirm(format, ap, test, count));
+	return (confirm_2(format, ap, test, count));
 }
 
-int ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	va_list ap;
 	size_t	count;
@@ -95,7 +93,7 @@ int ft_printf(const char *format, ...)
 			format = confirm(++format, &ap, &count);
 		else
 		{
-			write (1, format, 1);
+			write(1, format, 1);
 			format++;
 			(count)++;
 		}

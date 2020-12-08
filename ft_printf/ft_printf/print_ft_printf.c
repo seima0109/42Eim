@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_ft_printf.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
+/*   Updated: 2020/12/08 18:36:43 by stomonoh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void print_type_c(info *test, unsigned char c, size_t *count)
@@ -21,18 +33,20 @@ void print_type_s(info *test, char *str, size_t *count)
 {
 	int len;
 
+	if (str == NULL)
+		str = "(null)";
 	len = ft_strlen(str);
-	len = (len < test->width || test->width == -1) ? len : test->width;
+	len = (len < test->width || test->width <= -1) ? len : test->width;
 	*count += test->mini > len ? test->mini : len; 
 	if (test->flag != -1)
 	{
-		while (test->mini-- - len > 0 && test->mini > 0)
+		while (test->mini - len > 0 && test->mini-- > 0)
 			write(1, test->flag == 0 ? "0" : " ", 1);
 	}
 	write (1, str, len);
 	if (test->flag == -1)
 	{
-		while (test->mini-- - len > 0 && test->mini > 0)
+		while (test->mini - len > 0 && test->mini-- > 0)
 			write (1, " ", 1);
 	}
 	free(test);
@@ -54,14 +68,14 @@ void	print_hex(char type, size_t num)
 	write (1, &hex[num % 16], 1);
 }
 
-void	print_type_p(info *test, size_t p, size_t *count)
+void	print_type_p(info *test, long p, size_t *count)
 {
 	int		digit;//桁数
-	int		len;//桁数と精度と高い方が入る
+	long	len;//桁数と精度と高い方が入る
 	int		i;
 
 	i = 0;
-	digit = 3;//0x と　数字1桁目
+	digit = (test->width == 0 && p == 0) ? 2 : 3;//0x と　数字1桁目
 	len = p;
 	while ((len /= 16))
 		digit++;
@@ -80,19 +94,20 @@ void	print_type_p(info *test, size_t p, size_t *count)
 		while (test->width == -1 && test->mini-- - digit)
 			write (1, "0", 1);
 	}
-	print_hex(0, p);
-	while (test->flag == -1 && (test->mini-- - len) && test->mini > 0)
+	if (test->width != 0 || p != 0)
+		print_hex(0, p);
+	while (test->flag == -1 && (test->mini - len) > 0 && test->mini-- > 0)
 		write(1, " ", 1);
 }
 
-void	print_type_xX(info *test, int num, size_t *count)
+void	print_type_xX(info *test, unsigned int num, size_t *count)
 {
 	int	digit;
 	int	len;
 	int	i;
 
 	len = num;
-	digit = 1;
+	digit = test->width == 0 ? 0 : 1;
 	while ((len /= 16))
 		digit++;
 	len = digit < test->width ? test->width : digit;
@@ -103,7 +118,8 @@ void	print_type_xX(info *test, int num, size_t *count)
 	i = 0;
 	while (test->width != -1 && len - i++ > digit)
 		write(1, "0", 1);
-	print_hex(test->type, num);
+	if (test->width != 0)
+		print_hex(test->type, num);
 	while (test->flag == -1 && test->mini-- > len)
 		write(1, " ", 1);
 }
