@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/08 19:03:30 by stomonoh          #+#    #+#             */
+/*   Updated: 2020/12/08 19:04:39 by stomonoh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void		print_persent(info *test, va_list *ap, size_t *count)
@@ -18,7 +30,7 @@ void		print_persent(info *test, va_list *ap, size_t *count)
 		print_type_c(test, '%', count);
 }
 
-const char	*confirm_2(const char *format, va_list *ap, info *test, size_t *count)
+const char	*conf_2(const char *format, va_list *ap, info *test, size_t *count)
 {
 	test->width = -1;
 	if (*format == '.')
@@ -77,10 +89,10 @@ const char	*confirm(const char *format, va_list *ap, size_t *count)
 		}
 		format++;
 	}
-	return (confirm_2(format, ap, test, count));
+	return (conf_2(format, ap, test, count));
 }
 
-int		ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	va_list ap;
 	size_t	count;
@@ -99,5 +111,5 @@ int		ft_printf(const char *format, ...)
 		}
 	}
 	va_end(ap);
-	return (count);//文字数
+	return (count);
 }
