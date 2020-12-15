@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:03:30 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/08 19:04:39 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/15 11:36:47 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ const char	*confirm(const char *format, va_list *ap, size_t *count)
 	test->mini = 0;
 	while (*format == '-' || *format == '0')
 	{
-		if (*format == '-')
+		/*if (*format == '-')
 			test->flag = -1;
 		else if (*format == '0' && test->flag == 1)
-			test->flag = 0;
+			test->flag = 0;*/
+		test->flag = (*format == '0' && test->flag != -1) ? 0 : -1;
 		format++;
 	}
 	while (ft_isdigit(*format))
