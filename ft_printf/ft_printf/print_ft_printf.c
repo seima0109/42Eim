@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/08 18:36:43 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/15 11:52:42 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void print_type_c(info *test, unsigned char c, size_t *count)
 		while (test->mini-- - 1 && test->mini > 0)
 			write(1, " ", 1);
 	}
-	free(test);
 }
 
 void print_type_s(info *test, char *str, size_t *count)
@@ -49,7 +48,6 @@ void print_type_s(info *test, char *str, size_t *count)
 		while (test->mini - len > 0 && test->mini-- > 0)
 			write (1, " ", 1);
 	}
-	free(test);
 }
 
 void	print_hex(char type, size_t num)

@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:03:30 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/15 11:47:48 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/15 11:52:21 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int			ft_printf(const char *format, ...)
 			test->flag = 1;
 			test->mini = 0;
 			format = confirm(++format, &ap, test, &count);
+			free(test);
 		}
 		else
 		{
