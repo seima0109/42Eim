@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:03:30 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/15 11:36:47 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/15 11:47:48 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,10 @@ const char	*conf_2(const char *format, va_list *ap, info *test, size_t *count)
 	return (format);
 }
 
-const char	*confirm(const char *format, va_list *ap, size_t *count)
+const char	*confirm(const char *format, va_list *ap, info *test, size_t *count)
 {
-	info *test;
-
-	test = malloc(sizeof(info));
-	test->flag = 1;
-	test->mini = 0;
 	while (*format == '-' || *format == '0')
 	{
-		/*if (*format == '-')
-			test->flag = -1;
-		else if (*format == '0' && test->flag == 1)
-			test->flag = 0;*/
 		test->flag = (*format == '0' && test->flag != -1) ? 0 : -1;
 		format++;
 	}
@@ -97,13 +88,19 @@ int			ft_printf(const char *format, ...)
 {
 	va_list ap;
 	size_t	count;
+	info	*test;
 
 	count = 0;
 	va_start(ap, format);
 	while (*format)
 	{
 		if (*format == '%' && *(format + 1))
-			format = confirm(++format, &ap, &count);
+		{
+			test = malloc(sizeof(info));
+			test->flag = 1;
+			test->mini = 0;
+			format = confirm(++format, &ap, test, &count);
+		}
 		else
 		{
 			write(1, format, 1);
