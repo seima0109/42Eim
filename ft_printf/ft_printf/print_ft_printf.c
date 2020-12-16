@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 18:14:10 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 18:49:04 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	print_type_s(t_in *test, char *str, size_t *count)
 	}
 }
 
-void	print_hex(char type, size_t num)
+void	print_hex(char type, size_t num, size_t *count)
 {
 	const char	*hex;
 
@@ -61,10 +61,12 @@ void	print_hex(char type, size_t num)
 	if (num < 16)
 	{
 		write(1, &hex[num], 1);
+		(*count)++;
 		return ;
 	}
-	print_hex(type, num / 16);
+	print_hex(type, num / 16, count);
 	write(1, &hex[num % 16], 1);
+	(*count)++;
 }
 
 void	print_type_p(t_in *test, long p, size_t *count)
@@ -78,6 +80,7 @@ void	print_type_p(t_in *test, long p, size_t *count)
 		digit++;
 	len = digit < test->width + 2 ? test->width + 2 : digit;
 	*count += len < test->mini ? test->mini : len;
+	*count -= digit;
 	if (!(test->flag == 0 && test->width == -1) && (test->flag != -1))//0フラグ+精度なし、は-フラグ、のどちらでもない場合(左詰めでも0うめでもない場合)
 		while (test->mini-- > len && test->mini > 0)
 			write(1, " ", 1);
@@ -87,7 +90,7 @@ void	print_type_p(t_in *test, long p, size_t *count)
 	while (test->flag == 0 && test->width == -1 && test->mini-- - digit)
 		write(1, "0", 1);
 	if (test->width != 0 || p != 0)
-		print_hex(0, p);
+		print_hex(0, p, count);
 	while (test->flag == -1 && (test->mini - len) > 0 && test->mini-- > 0)
 		write(1, " ", 1);
 }
@@ -104,6 +107,7 @@ void	print_type_x(t_in *test, unsigned int num, size_t *count)
 		digit++;
 	len = digit < test->width ? test->width : digit;
 	*count += len < test->mini ? test->mini : len;
+	*count -= digit;
 	i = 0;
 	while (test->flag != -1 && test->mini != 0 && test->mini - i++ > len)
 		write(1, (test->width == -1 && test->flag == 0) ? "0" : " ", 1);
@@ -111,7 +115,7 @@ void	print_type_x(t_in *test, unsigned int num, size_t *count)
 	while (test->width != -1 && len - i++ > digit)
 		write(1, "0", 1);
 	if (test->width != 0)
-		print_hex(test->type, num);
+		print_hex(test->type, num, count);
 	while (test->flag == -1 && test->mini-- > len)
 		write(1, " ", 1);
 }

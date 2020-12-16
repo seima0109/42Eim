@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 17:58:01 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 18:37:08 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 18:48:02 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		print_type_x(t_in *test, unsigned int num, size_t *count);
 void		print_type_u(t_in *test, unsigned int num, size_t *count);
 void		print_type_id(t_in *test, int num, size_t *count);
 void		print_type_id_2(t_in *test, int len, int digit, long num, size_t *count);
-void		print_hex(char type, size_t num);
+void		print_hex(char type, size_t num, size_t *count);
 void		print_num(unsigned int num, size_t *count);
 void		free_box(t_in *test);
 
