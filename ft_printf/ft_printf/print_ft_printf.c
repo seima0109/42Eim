@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 17:39:59 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 17:49:41 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void	print_type_p(info *test, long p, size_t *count)
 {
 	int		digit;
 	long	len;//桁数と精度と高い方が入る
-	int		i;
+	//int		i;
 
-	i = 0;
+	//i = 0;
 	digit = (test->width == 0 && p == 0) ? 2 : 3;//0x と　数字1桁目
 	len = p;
 	while ((len /= 16))
@@ -84,13 +84,10 @@ void	print_type_p(info *test, long p, size_t *count)
 		while (test->mini-- > len && test->mini > 0)
 			write(1, " ", 1);
 	write(1, "0x", 2);
-	if (test->flag == 0 || test->width != -1)
-	{
-		while (test->width != -1 && test->width + 2 - i++ > digit)
-			write(1, "0", 1);
-		while (test->width == -1 && test->mini-- - digit)
-			write(1, "0", 1);
-	}
+	while (test->width != -1 && test->width + 2 /*- i++*/ > digit++)
+		write(1, "0", 1);
+	while (test->flag == 0 && test->width == -1 && test->mini-- - digit)
+		write(1, "0", 1);
 	if (test->width != 0 || p != 0)
 		print_hex(0, p);
 	while (test->flag == -1 && (test->mini - len) > 0 && test->mini-- > 0)
