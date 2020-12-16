@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 17:40:13 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 17:52:20 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	print_type_id(info *test, int num, size_t *count)
 {
 	int				digit;
 	int				len;
-	//int				i;
 	unsigned int	new;
 
 	digit = num < 0 ? 2 : 1;
@@ -74,16 +73,6 @@ void	print_type_id(info *test, int num, size_t *count)
 	if (num < 0)
 		write(1, "-", 1);
 	print_type_id_2(test, len, digit, new);
-	/*i = 0;
-	while (test->flag != -1 && test->mini - i++ > len)
-		write(1, (test->flag == 0 && test->width == -1) ? "0" : " ", 1);
-	i = 0;
-	while (len - i++ > digit)
-		write(1, "0", 1);
-	if (test->width != 0)
-		print_num(new);
-	while (test->flag == -1 && test->mini-- > len)
-		write(1, " ", 1);*/
 }
 
 void	print_type_id_2(info *test, int len, int digit, long num)
