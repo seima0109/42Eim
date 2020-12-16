@@ -6,22 +6,17 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 17:00:06 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 17:04:00 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_num(long num)
+void	print_num(unsigned int num)
 {
 	char *dec;
 
 	dec = "0123456789";
-	if (num < 0)
-	{
-		write(1, "-", 1);
-		num = -num;
-	}
 	if (num < 10)
 	{
 		write(1, &dec[num], 1);
@@ -60,13 +55,13 @@ void	print_type_id(info *test, int num, size_t *count)
 	int				digit;
 	int				len;
 	int				i;
-//	unsigned int	new;
+	unsigned int	new;
 
 	digit = num < 0 ? 2 : 1;
 	digit = test->width == 0 ? 0 : digit;
 	test->width = (test->width > 0 && num < 0) ? test->width + 1 : test->width;
 	len = num;
-//	new = num < 0 ? -num : num;
+	new = num < 0 ? -num : num;
 	while ((len /= 10))
 		digit++;
 	len = digit < test->width ? test->width : digit;
@@ -76,8 +71,8 @@ void	print_type_id(info *test, int num, size_t *count)
 		while (test->mini > len && test->mini-- > 0)
 			write(1, " ", 1);
 	}
-//	if (num < 0)
-//		write(1, "-", 1);
+	if (num < 0)
+		write(1, "-", 1);
 	i = 0;
 	while (test->flag != -1 && test->mini - i++ > len)
 		write(1, (test->flag == 0 && test->width == -1) ? "0" : " ", 1);
@@ -85,7 +80,7 @@ void	print_type_id(info *test, int num, size_t *count)
 	while (len - i++ > digit)
 		write(1, "0", 1);
 	if (test->width != 0)
-		print_num(num);
+		print_num(new);
 	while (test->flag == -1 && test->mini-- > len)
 		write(1, " ", 1);
 }
