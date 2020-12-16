@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 18:38:21 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 18:43:59 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	print_num(unsigned int num, size_t *count)
 	if (num < 10)
 	{
 		write(1, &dec[num], 1);
-		*count++;
+		(*count)++;
 		return ;
 	}
 	print_num(num / 10, count);
 	write(1, &dec[num % 10], 1);
-	*count++;
+	(*count)++;
 }
 
 void	print_type_u(t_in *test, unsigned int num, size_t *count)
@@ -68,7 +68,7 @@ void	print_type_id(t_in *test, int num, size_t *count)
 		digit++;
 	len = digit < test->width ? test->width : digit;
 	*count += len < test->mini ? test->mini : len;
-	*count -= digit;
+	*count -= num < 0 ? digit - 1 : digit;
 	if (!(test->flag == 0 && test->width == -1) && test->flag != -1)
 	{//0フラグ+精度なし、または-フラグ、のどちらでもない場合(左詰めでも0うめでもない場合)
 		while (test->mini > len && test->mini-- > 0)
