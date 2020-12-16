@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 17:36:17 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 17:39:59 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	print_hex(char type, size_t num)
 
 void	print_type_p(info *test, long p, size_t *count)
 {
-	int		digit;//桁数
+	int		digit;
 	long	len;//桁数と精度と高い方が入る
 	int		i;
 
@@ -80,11 +80,9 @@ void	print_type_p(info *test, long p, size_t *count)
 		digit++;
 	len = digit < test->width + 2 ? test->width + 2 : digit;
 	*count += len < test->mini ? test->mini : len;
-	if (!(test->flag == 0 && test->width == -1) && (test->flag != -1))
-	{//0フラグ+精度なし、または-フラグ、のどちらでもない場合(左詰めでも0うめでもない場合)
+	if (!(test->flag == 0 && test->width == -1) && (test->flag != -1))//0フラグ+精度なし、は-フラグ、のどちらでもない場合(左詰めでも0うめでもない場合)
 		while (test->mini-- > len && test->mini > 0)
 			write(1, " ", 1);
-	}
 	write(1, "0x", 2);
 	if (test->flag == 0 || test->width != -1)
 	{
@@ -97,8 +95,6 @@ void	print_type_p(info *test, long p, size_t *count)
 		print_hex(0, p);
 	while (test->flag == -1 && (test->mini - len) > 0 && test->mini-- > 0)
 		write(1, " ", 1);
-
-	//print_type_id_2(test, len, digit, p);
 }
 
 void	print_type_xX(info *test, unsigned int num, size_t *count)
