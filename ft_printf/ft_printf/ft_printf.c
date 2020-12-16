@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:03:30 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 18:14:25 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 18:18:02 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int			ft_printf(const char *format, ...)
 	{
 		if (*format == '%' && *(format + 1))
 		{
-			test = malloc(sizeof(t_info));
+			test = malloc(sizeof(t_in));
 			test->flag = 1;
 			test->mini = 0;
 			format = confirm(++format, &ap, test, &count);

@@ -6,13 +6,13 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 18:13:55 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 18:38:21 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_num(unsigned int num)
+void	print_num(unsigned int num, size_t *count)
 {
 	char *dec;
 
@@ -20,10 +20,12 @@ void	print_num(unsigned int num)
 	if (num < 10)
 	{
 		write(1, &dec[num], 1);
+		*count++;
 		return ;
 	}
-	print_num(num / 10);
+	print_num(num / 10, count);
 	write(1, &dec[num % 10], 1);
+	*count++;
 }
 
 void	print_type_u(t_in *test, unsigned int num, size_t *count)
@@ -38,6 +40,7 @@ void	print_type_u(t_in *test, unsigned int num, size_t *count)
 		digit++;
 	len = digit < test->width ? test->width : digit;
 	*count += len < test->mini ? test->mini : len;
+	*count -= digit;
 	i = 0;
 	while (test->flag != -1 && test->mini - i++ > len)
 		write(1, (test->flag == 0 && test->width == -1) ? "0" : " ", 1);
@@ -45,7 +48,7 @@ void	print_type_u(t_in *test, unsigned int num, size_t *count)
 	while (len - i++ > digit)
 		write(1, "0", 1);
 	if (test->width != 0)
-		print_num(num);
+		print_num(num, count);
 	while (test->flag == -1 && test->mini-- > len)
 		write(1, " ", 1);
 }
@@ -65,6 +68,7 @@ void	print_type_id(t_in *test, int num, size_t *count)
 		digit++;
 	len = digit < test->width ? test->width : digit;
 	*count += len < test->mini ? test->mini : len;
+	*count -= digit;
 	if (!(test->flag == 0 && test->width == -1) && test->flag != -1)
 	{//0フラグ+精度なし、または-フラグ、のどちらでもない場合(左詰めでも0うめでもない場合)
 		while (test->mini > len && test->mini-- > 0)
@@ -72,10 +76,10 @@ void	print_type_id(t_in *test, int num, size_t *count)
 	}
 	if (num < 0)
 		write(1, "-", 1);
-	print_type_id_2(test, len, digit, new);
+	print_type_id_2(test, len, digit, new, count);
 }
 
-void	print_type_id_2(t_in *test, int len, int digit, long num)
+void	print_type_id_2(t_in *test, int len, int digit, long num, size_t *count)
 {
 	int	i;
 
@@ -88,7 +92,7 @@ void	print_type_id_2(t_in *test, int len, int digit, long num)
 		while (len - i++ > digit)
 			write(1, "0", 1);
 		if (test->width != 0)
-			print_num(num);
+			print_num(num, count);
 		while (test->flag == -1 && test->mini-- > len)
 			write(1, " ", 1);
 	}
