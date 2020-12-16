@@ -6,13 +6,13 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/15 11:52:42 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 16:13:15 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void print_type_c(info *test, unsigned char c, size_t *count)
+void	print_type_c(info *test, unsigned char c, size_t *count)
 {
 	*count += test->mini != 0 ? test->mini : 1;
 	if (test->flag != -1)
@@ -28,7 +28,7 @@ void print_type_c(info *test, unsigned char c, size_t *count)
 	}
 }
 
-void print_type_s(info *test, char *str, size_t *count)
+void	print_type_s(info *test, char *str, size_t *count)
 {
 	int len;
 
@@ -36,34 +36,35 @@ void print_type_s(info *test, char *str, size_t *count)
 		str = "(null)";
 	len = ft_strlen(str);
 	len = (len < test->width || test->width <= -1) ? len : test->width;
-	*count += test->mini > len ? test->mini : len; 
+	*count += test->mini > len ? test->mini : len;
 	if (test->flag != -1)
 	{
 		while (test->mini - len > 0 && test->mini-- > 0)
 			write(1, test->flag == 0 ? "0" : " ", 1);
 	}
-	write (1, str, len);
+	write(1, str, len);
 	if (test->flag == -1)
 	{
 		while (test->mini - len > 0 && test->mini-- > 0)
-			write (1, " ", 1);
+			write(1, " ", 1);
 	}
 }
 
 void	print_hex(char type, size_t num)
 {
 	const char	*hex;
+
 	if (type != 'X')
 		hex = "0123456789abcdef";
 	else
 		hex = "0123456789ABCDEF";
 	if (num < 16)
 	{
-		write (1, &hex[num], 1);
+		write(1, &hex[num], 1);
 		return ;
 	}
-	print_hex (type, num / 16);
-	write (1, &hex[num % 16], 1);
+	print_hex(type, num / 16);
+	write(1, &hex[num % 16], 1);
 }
 
 void	print_type_p(info *test, long p, size_t *count)
@@ -88,9 +89,9 @@ void	print_type_p(info *test, long p, size_t *count)
 	if (test->flag == 0 || test->width != -1)
 	{
 		while (test->width != -1 && test->width + 2 - i++ > digit)
-			write (1, "0", 1);
+			write(1, "0", 1);
 		while (test->width == -1 && test->mini-- - digit)
-			write (1, "0", 1);
+			write(1, "0", 1);
 	}
 	if (test->width != 0 || p != 0)
 		print_hex(0, p);
