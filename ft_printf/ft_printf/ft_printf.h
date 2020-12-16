@@ -22,7 +22,7 @@ void	print_type_p(info *test, long p, size_t *count);
 void	print_type_xX(info *test, unsigned int num, size_t *count);
 void	print_type_u(info *test, unsigned int num, size_t *count);
 void	print_type_id(info *test, int num, size_t *count);
-void	print_type_id_2(info *test, int len, int digit, unsigned int new);
+void	print_type_id_2(info *test, int len, int digit, long num);
 void	print_hex(char type, size_t num);
 void	print_num(unsigned int num);
 void	free_box(info *test);
