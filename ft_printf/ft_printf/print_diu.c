@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 18:07:27 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 18:13:55 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_num(unsigned int num)
 	write(1, &dec[num % 10], 1);
 }
 
-void	print_type_u(t_info *test, unsigned int num, size_t *count)
+void	print_type_u(t_in *test, unsigned int num, size_t *count)
 {
 	int				digit;
 	int				len;
@@ -50,7 +50,7 @@ void	print_type_u(t_info *test, unsigned int num, size_t *count)
 		write(1, " ", 1);
 }
 
-void	print_type_id(t_info *test, int num, size_t *count)
+void	print_type_id(t_in *test, int num, size_t *count)
 {
 	int				digit;
 	int				len;
@@ -75,7 +75,7 @@ void	print_type_id(t_info *test, int num, size_t *count)
 	print_type_id_2(test, len, digit, new);
 }
 
-void	print_type_id_2(t_info *test, int len, int digit, long num)
+void	print_type_id_2(t_in *test, int len, int digit, long num)
 {
 	int	i;
 
