@@ -6,13 +6,13 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 17:52:43 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 18:07:48 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_type_c(info *test, unsigned char c, size_t *count)
+void	print_type_c(t_info *test, unsigned char c, size_t *count)
 {
 	*count += test->mini != 0 ? test->mini : 1;
 	if (test->flag != -1)
@@ -28,7 +28,7 @@ void	print_type_c(info *test, unsigned char c, size_t *count)
 	}
 }
 
-void	print_type_s(info *test, char *str, size_t *count)
+void	print_type_s(t_info *test, char *str, size_t *count)
 {
 	int len;
 
@@ -67,7 +67,7 @@ void	print_hex(char type, size_t num)
 	write(1, &hex[num % 16], 1);
 }
 
-void	print_type_p(info *test, long p, size_t *count)
+void	print_type_p(t_info *test, long p, size_t *count)
 {
 	int		digit;
 	long	len;//桁数と精度と高い方が入る
@@ -92,7 +92,7 @@ void	print_type_p(info *test, long p, size_t *count)
 		write(1, " ", 1);
 }
 
-void	print_type_xX(info *test, unsigned int num, size_t *count)
+void	print_type_xX(t_info *test, unsigned int num, size_t *count)
 {
 	int	digit;
 	int	len;

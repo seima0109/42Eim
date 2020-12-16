@@ -6,13 +6,13 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:03:30 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 17:33:07 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/16 18:08:09 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		print_persent(info *test, va_list *ap, size_t *count)
+void		print_persent(t_info *test, va_list *ap, size_t *count)
 {
 	if (test->type == 'c')
 		print_type_c(test, va_arg(*ap, int), count);
@@ -30,7 +30,7 @@ void		print_persent(info *test, va_list *ap, size_t *count)
 		print_type_c(test, '%', count);
 }
 
-const char	*conf_2(const char *format, va_list *ap, info *test, size_t *count)
+const char	*conf_2(const char *format, va_list *ap, t_info *test, size_t *count)
 {
 	test->width = -1;
 	if (*format == '.')
@@ -58,7 +58,7 @@ const char	*conf_2(const char *format, va_list *ap, info *test, size_t *count)
 	return (format);
 }
 
-const char	*confirm(const char *format, va_list *ap, info *test, size_t *count)
+const char	*confirm(const char *format, va_list *ap, t_info *test, size_t *count)
 {
 	while (*format == '-' || *format == '0')
 	{
@@ -88,7 +88,7 @@ int			ft_printf(const char *format, ...)
 {
 	va_list ap;
 	size_t	count;
-	info	*test;
+	t_info	*test;
 
 	count = 0;
 	va_start(ap, format);
@@ -96,7 +96,7 @@ int			ft_printf(const char *format, ...)
 	{
 		if (*format == '%' && *(format + 1))
 		{
-			test = malloc(sizeof(info));
+			test = malloc(sizeof(t_info));
 			test->flag = 1;
 			test->mini = 0;
 			format = confirm(++format, &ap, test, &count);
