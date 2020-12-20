@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:03:30 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 18:18:02 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 12:55:12 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		print_persent(t_in *test, va_list *ap, size_t *count)
 	else if (test->type == 's')
 		print_type_s(test, va_arg(*ap, char *), count);
 	else if (test->type == 'p')
-		print_type_p(test, (long)va_arg(*ap, void *), count);
+		print_type_p(test, (size_t)va_arg(*ap, void *), count);
 	else if (test->type == 'd' || test->type == 'i')
 		print_type_id(test, va_arg(*ap, int), count);
 	else if (test->type == 'u')

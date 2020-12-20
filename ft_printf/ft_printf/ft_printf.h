@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 17:58:01 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 18:48:02 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 12:54:44 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct{
 int			ft_printf(const char *str, ...);
 void		print_type_c(t_in *test, unsigned char c, size_t *count);
 void		print_type_s(t_in *test, char *str, size_t *count);
-void		print_type_p(t_in *test, long p, size_t *count);
+void		print_type_p(t_in *test, size_t p, size_t *count);
 void		print_type_x(t_in *test, unsigned int num, size_t *count);
 void		print_type_u(t_in *test, unsigned int num, size_t *count);
 void		print_type_id(t_in *test, int num, size_t *count);
