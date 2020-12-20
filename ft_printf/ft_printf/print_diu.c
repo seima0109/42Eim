@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 19:45:30 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 19:49:07 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,9 @@ void	print_type_id(t_in *test, int num, size_t *count)
 	int	zero;
 	int	space;
 
-	len = (!test->width && !num) ? 0 : 1;
+	len = num < 0 ? 2 : 1;
+	len = (!test->width && !num) ? 0 : len;
+	test->width = (test->width > 0 && num < 0) ? test->width + 1 : test->width;
 	tmp = num;
 	while ((tmp /= 10))
 		len++;
