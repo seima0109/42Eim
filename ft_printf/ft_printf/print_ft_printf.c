@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 13:00:44 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 13:03:58 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ void	print_type_p(t_in *test, size_t p, size_t *count)
 		while (space-- > 0)
 			*count += write(1, " ", 1);
 	*count += write(1, "0x", 2);
+	while (zero-- > 0)
+		*count += write(1, "0", 1);
 	if (test->width != 0 || p != 0)
 		print_hex('p', p, count);
 	if (test->flag == -1)
