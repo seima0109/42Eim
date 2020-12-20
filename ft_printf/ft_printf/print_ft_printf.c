@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 13:03:58 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 16:09:44 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,16 @@ void	print_type_p(t_in *test, long p, size_t *count)
 }*/
 void	print_type_p(t_in *test, size_t p, size_t *count)
 {
-	int		plen; 
+	int		plen;
 	int		zero;
 	int 	space;
-	long	ptmp;
+	size_t	ptmp;
 
 	plen = (!p && !test->width) ? 0 : 1;
 	ptmp = p;
 	while ((ptmp /= 16))
 		plen++;
-	zero = (test->width < 0 && test-> flag == 0)
+	zero = (test->width < 0 && test->flag == 0)
 			? test->width - plen - 2 : test->width - plen;
 	space = (zero > 0) ? test->mini - zero - plen - 2 : test->mini - plen - 2;
 	if (test->flag != -1)
@@ -138,7 +138,7 @@ void	print_type_x(t_in *test, unsigned int num, size_t *count)
 	i = 0;
 	while (test->width != -1 && len - i++ > digit)
 		write(1, "0", 1);
-	if (test->width != 0)
+	if (test->width != 0 || num != 0)
 		print_hex(test->type, num, count);
 	while (test->flag == -1 && test->mini-- > len)
 		write(1, " ", 1);
