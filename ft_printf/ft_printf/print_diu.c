@@ -6,23 +6,30 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 19:49:07 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 20:13:27 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_num(unsigned int num, size_t *count)
+void	print_num(long num, int zero, size_t *count)
 {
 	char *dec;
 
+	if (num < 0)
+	{
+		*count += write(1, "-", 1);
+		num *= -1;
+	}
+	while (zero-- > 0)
+		*count += write(1, "0", 1);
 	dec = "0123456789";
 	if (num < 10)
 	{
 		*count += write(1, &dec[num], 1);
 		return ;
 	}
-	print_num(num / 10, count);
+	print_num(num / 10, 0, count);
 	*count += write(1, &dec[num % 10], 1);
 }
 
@@ -44,10 +51,10 @@ void	print_type_u(t_in *test, size_t num, size_t *count)
 	if (test->flag != -1)
 		while (space-- > 0)
 			*count += write(1, " ", 1);
-	while (zero-- > 0)
-		*count += write(1, "0", 1);
+	/*while (zero-- > 0)
+		*count += write(1, "0", 1);*/
 	if (test->width != 0 || num != 0)
-		print_num(num, count);
+		print_num(num, zero, count);
 	if (test->flag == -1)
 		while (space-- > 0)
 			*count += write(1, " ", 1);
@@ -118,15 +125,15 @@ void	print_type_id(t_in *test, int num, size_t *count)
 	if (test->flag != -1)
 		while (space-- > 0)
 			*count += write(1, " ", 1);
-	if (num < 0)
+	/*if (num < 0)
 	{
 		num = -num;
 		*count += write(1, "-", 1);
 	}
 	while (zero-- > 0)
-		*count += write(1, "0", 1);
+		*count += write(1, "0", 1);*/
 	if (test->width != 0 || num != 0)
-		print_num(num, count);
+		print_num(num, zero, count);
 	if (test->flag == -1)
 		while (space-- > 0)
 			*count += write(1, " ", 1);
