@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 19:41:24 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 19:43:22 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ void	print_type_id(t_in *test, int num, size_t *count)
 	if (test->width != 0 || num != 0)
 		print_num(num, count);
 	if (test->flag == -1)
-		*count += write(1, " ", 1);
+		while (space-- > 0)
+			*count += write(1, " ", 1);
 }
