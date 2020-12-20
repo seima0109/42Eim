@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 20:20:36 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 20:26:36 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_type_u(t_in *test, size_t num, size_t *count)
 
 	ulen = (!test->width && !num) ? 0 : 1;
 	utmp = num;
-	while ((utmp/=10))
+	while ((utmp /= 10))
 		ulen++;
 	zero = (test->width > ulen) ? test->width - ulen : 0;
 	zero = (test->width < 0 && test->flag == 0) ? test->mini - ulen : zero;
@@ -80,6 +80,7 @@ void	print_type_id(t_in *test, int num, size_t *count)
 			*count += write(1, " ", 1);
 	if (test->width != 0 || num != 0)
 		print_num(num, zero, count);
-	while (test->flag == -1 && space-- > 0)
-		*count += write(1, " ", 1);
+	if (test->flag == -1)
+		while (space-- > 0))
+			*count += write(1, " ", 1);
 }
