@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 19:14:23 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 19:38:56 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,7 @@ void	print_num(unsigned int num, size_t *count)
 	print_num(num / 10, count);
 	*count += write(1, &dec[num % 10], 1);
 }
-/*
-void	print_type_u(t_in *test, size_t num, size_t *count)
-{
-	int				digit;
-	int				len;
-	int				i;
 
-	digit = test->width == 0 ? 0 : 1;
-	len = num;
-	while ((len /= 10))
-		digit++;
-	len = digit < test->width ? test->width : digit;
-	*count += len < test->mini ? test->mini : len;
-	*count -= digit;
-	i = 0;
-	while (test->flag != -1 && test->mini - i++ > len)
-		write(1, (test->flag == 0 && test->width == -1) ? "0" : " ", 1);
-	i = 0;
-	while (len - i++ > digit)
-		write(1, "0", 1);
-	if (test->width != 0 || num != 0)
-		print_num(num, count);
-	while (test->flag == -1 && test->mini-- > len)
-		write(1, " ", 1);
-}*/
 void	print_type_u(t_in *test, size_t num, size_t *count)
 {
 	int		ulen;
@@ -76,7 +52,7 @@ void	print_type_u(t_in *test, size_t num, size_t *count)
 		while (space-- > 0)
 			*count += write(1, " ", 1);
 }
-
+/*
 void	print_type_id(t_in *test, int num, size_t *count)
 {
 	int				digit;
@@ -120,4 +96,33 @@ void	print_type_id_2(t_in *test, int len, int digit, long num, size_t *count)
 		while (test->flag == -1 && test->mini-- > len)
 			write(1, " ", 1);
 	}
+}*/
+
+void	print_type_id(t_in *test, int num, size_t *count)
+{
+	int	len;
+	int	tmp;
+	int	zero;
+	int	space;
+
+	len = num < 0 ? 2 : 1;
+	len = (!test->width && !num) ? 0 : len;
+	tmp = num;
+	while ((tmp /= 10))
+		len++;
+	zero = (test->width > len) ? test->width - len : 0;
+	zero = (test->flag == 0 && test->width < 0) ? test->mini - len : zero;
+	zero = zero < 0 ? 0 : zero;
+	space = test->mini - zero - len;
+	if (test->flag != -1)
+		while (space-- > 0)
+			*count += write(1, " ", 1);
+	if (num < 0)
+		*count += write(1, "-", 1);
+	while (zero-- > 0)
+		*count += write(1, "0", 1);
+	if (test->width != 0 || num != 0)
+		print_num(num, count);
+	if (test->flag == -1)
+		*count += write(1, " ", 1);
 }
