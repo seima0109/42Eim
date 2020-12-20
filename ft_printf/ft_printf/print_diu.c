@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/16 18:43:59 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 16:05:07 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	print_type_id_2(t_in *test, int len, int digit, long num, size_t *count)
 		i = 0;
 		while (len - i++ > digit)
 			write(1, "0", 1);
-		if (test->width != 0)
+		if (test->width != 0 || num != 0)
 			print_num(num, count);
 		while (test->flag == -1 && test->mini-- > len)
 			write(1, " ", 1);
