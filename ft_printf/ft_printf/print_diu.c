@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 16:09:24 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 17:53:26 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_num(unsigned int num, size_t *count)
 	(*count)++;
 }
 
-void	print_type_u(t_in *test, unsigned int num, size_t *count)
+void	print_type_u(t_in *test, size_t num, size_t *count)
 {
 	int				digit;
 	int				len;

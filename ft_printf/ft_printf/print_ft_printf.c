@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 16:09:44 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 17:52:55 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	print_type_p(t_in *test, size_t p, size_t *count)
 			*count += write(1, " ", 1);
 }
 
-void	print_type_x(t_in *test, unsigned int num, size_t *count)
+void	print_type_x(t_in *test, size_t num, size_t *count)
 {
 	int	digit;
 	int	len;
