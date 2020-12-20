@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 17:52:55 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 18:05:29 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	print_type_x(t_in *test, size_t num, size_t *count)
 	int	i;
 
 	len = num;
-	digit = test->width == 0 ? 0 : 1;
+	digit = (test->width == 0 && num == 0) ? 0 : 1;
 	while ((len /= 16))
 		digit++;
 	len = digit < test->width ? test->width : digit;
