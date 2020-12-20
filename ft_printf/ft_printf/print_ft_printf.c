@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 18:48:55 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 19:03:47 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,19 +145,21 @@ void	print_type_x(t_in *test, size_t num, size_t *count)
 }*/
 void	print_type_x(t_in *test, size_t num, size_t *count)
 {
-	int				xlen;
-	int				space;
-	int				zero;
-	unsigned int	xtmp;
+	int		xlen;
+	int		space;
+	int		zero;
+	size_t	xtmp;
 
 	xtmp = num;
 	xlen = (!num && !test->width) ? 0 : 1;
-	while ((xtmp/16))
+	
+	while ((xtmp /= 16))
 		xlen++;
 	zero = (test->width > xlen) ? test->width - xlen : 0;
 	zero = (test->width < 0 && test->flag == 0) ? test->mini - xlen : zero;
 	zero = (zero < 0) ? 0 :zero;
 	space = test->mini - zero - xlen;
+	(void)count;
 	if (test->flag != -1)
 		while (space-- > 0)
 			*count += write(1, " ", 1);
