@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:03:30 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 17:43:44 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 17:49:49 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,14 @@ const char	*confirm(const char *format, va_list *ap, t_in *test, size_t *count)
 	if (*format == '*')
 	{
 		test->mini = va_arg(*ap, int);
-		if (test->mini < 0)
-		{
-			test->flag = -1;
-			test->mini *= -1;
-		}
 		format++;
 	}
+	if (test->mini < 0)
+	{
+		test->flag = -1;
+		test->mini *= -1;
+	}
+		
 	return (conf_2(format, ap, test, count));
 }
 
