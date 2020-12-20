@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 17:53:26 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 18:12:39 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	print_type_id(t_in *test, int num, size_t *count)
 	unsigned int	new;
 
 	digit = num < 0 ? 2 : 1;
-	digit = test->width == 0 ? 0 : digit;
+	digit = (test->width == 0 && num == 0) ? 0 : digit;
 	test->width = (test->width > 0 && num < 0) ? test->width + 1 : test->width;
 	len = num;
 	new = num < 0 ? -num : num;
