@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 18:12:39 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 19:14:23 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@ void	print_num(unsigned int num, size_t *count)
 	dec = "0123456789";
 	if (num < 10)
 	{
-		write(1, &dec[num], 1);
-		(*count)++;
+		*count += write(1, &dec[num], 1);
 		return ;
 	}
 	print_num(num / 10, count);
-	write(1, &dec[num % 10], 1);
-	(*count)++;
+	*count += write(1, &dec[num % 10], 1);
 }
-
+/*
 void	print_type_u(t_in *test, size_t num, size_t *count)
 {
 	int				digit;
@@ -51,6 +49,32 @@ void	print_type_u(t_in *test, size_t num, size_t *count)
 		print_num(num, count);
 	while (test->flag == -1 && test->mini-- > len)
 		write(1, " ", 1);
+}*/
+void	print_type_u(t_in *test, size_t num, size_t *count)
+{
+	int		ulen;
+	int		zero;
+	int		space;
+	size_t	utmp;
+
+	ulen = (!test->width && !num) ? 0 : 1;
+	utmp = num;
+	while ((utmp/=10))
+		ulen++;
+	zero = (test->width > ulen) ? test->width - ulen : 0;
+	zero = (test->width < 0 && test->flag == 0) ? test->mini - ulen : zero;
+	zero = (zero < 0) ? 0 : zero;
+	space = test->mini - zero - ulen;
+	if (test->flag != -1)
+		while (space-- > 0)
+			*count += write(1, " ", 1);
+	while (zero-- > 0)
+		*count += write(1, "0", 1);
+	if (test->width != 0 || num != 0)
+		print_num(num, count);
+	if (test->flag == -1)
+		while (space-- > 0)
+			*count += write(1, " ", 1);
 }
 
 void	print_type_id(t_in *test, int num, size_t *count)
