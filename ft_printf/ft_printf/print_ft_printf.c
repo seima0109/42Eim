@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:43 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 19:28:10 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 20:23:09 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,8 @@ void	print_type_p(t_in *test, size_t p, size_t *count)
 		*count += write(1, "0", 1);
 	if (test->width != 0 || p != 0)
 		print_hex('p', p, count);
-	if (test->flag == -1)
-		while (space-- > 0)
-			*count += write(1, " ", 1);
+	if (test->flag == -1 && space-- > 0)
+		*count += write(1, " ", 1);
 }
 
 void	print_type_x(t_in *test, size_t num, size_t *count)
@@ -103,14 +102,12 @@ void	print_type_x(t_in *test, size_t num, size_t *count)
 
 	xtmp = num;
 	xlen = (!num && !test->width) ? 0 : 1;
-	
 	while ((xtmp /= 16))
 		xlen++;
 	zero = (test->width > xlen) ? test->width - xlen : 0;
 	zero = (test->width < 0 && test->flag == 0) ? test->mini - xlen : zero;
 	zero = (zero < 0) ? 0 :zero;
 	space = test->mini - zero - xlen;
-	(void)count;
 	if (test->flag != -1)
 		while (space-- > 0)
 			*count += write(1, " ", 1);

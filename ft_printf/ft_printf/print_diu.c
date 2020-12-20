@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 18:36:38 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 20:13:27 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 20:20:36 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,59 +51,12 @@ void	print_type_u(t_in *test, size_t num, size_t *count)
 	if (test->flag != -1)
 		while (space-- > 0)
 			*count += write(1, " ", 1);
-	/*while (zero-- > 0)
-		*count += write(1, "0", 1);*/
 	if (test->width != 0 || num != 0)
 		print_num(num, zero, count);
 	if (test->flag == -1)
 		while (space-- > 0)
 			*count += write(1, " ", 1);
 }
-/*
-void	print_type_id(t_in *test, int num, size_t *count)
-{
-	int				digit;
-	int				len;
-	unsigned int	new;
-
-	digit = num < 0 ? 2 : 1;
-	digit = (test->width == 0 && num == 0) ? 0 : digit;
-	test->width = (test->width > 0 && num < 0) ? test->width + 1 : test->width;
-	len = num;
-	new = num < 0 ? -num : num;
-	while ((len /= 10))
-		digit++;
-	len = digit < test->width ? test->width : digit;
-	*count += len < test->mini ? test->mini : len;
-	*count -= num < 0 ? digit - 1 : digit;
-	if (!(test->flag == 0 && test->width == -1) && test->flag != -1)
-	{//0フラグ+精度なし、または-フラグ、のどちらでもない場合(左詰めでも0うめでもない場合)
-		while (test->mini > len && test->mini-- > 0)
-			write(1, " ", 1);
-	}
-	if (num < 0)
-		write(1, "-", 1);
-	print_type_id_2(test, len, digit, new, count);
-}
-
-void	print_type_id_2(t_in *test, int len, int digit, long num, size_t *count)
-{
-	int	i;
-
-	if (test->type == 'i' || test->type == 'd')
-	{
-		i = 0;
-		while (test->flag != -1 && test->mini - i++ > len)
-			write(1, (test->flag == 0 && test->width == -1) ? "0" : " ", 1);
-		i = 0;
-		while (len - i++ > digit)
-			write(1, "0", 1);
-		if (test->width != 0 || num != 0)
-			print_num(num, count);
-		while (test->flag == -1 && test->mini-- > len)
-			write(1, " ", 1);
-	}
-}*/
 
 void	print_type_id(t_in *test, int num, size_t *count)
 {
@@ -125,16 +78,8 @@ void	print_type_id(t_in *test, int num, size_t *count)
 	if (test->flag != -1)
 		while (space-- > 0)
 			*count += write(1, " ", 1);
-	/*if (num < 0)
-	{
-		num = -num;
-		*count += write(1, "-", 1);
-	}
-	while (zero-- > 0)
-		*count += write(1, "0", 1);*/
 	if (test->width != 0 || num != 0)
 		print_num(num, zero, count);
-	if (test->flag == -1)
-		while (space-- > 0)
-			*count += write(1, " ", 1);
+	while (test->flag == -1 && space-- > 0)
+		*count += write(1, " ", 1);
 }
