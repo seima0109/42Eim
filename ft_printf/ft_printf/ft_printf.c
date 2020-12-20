@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/08 19:03:30 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/20 17:49:49 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/20 19:25:11 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,14 @@ const char	*conf_2(const char *format, va_list *ap, t_in *test, size_t *count)
 
 const char	*confirm(const char *format, va_list *ap, t_in *test, size_t *count)
 {
-	//
-	test->mini = ft_atoi((char *)format);
-	//
 	while (*format == '-' || *format == '0')
 	{
 		test->flag = (*format == '0' && test->flag != -1) ? 0 : -1;
 		format++;
 	}
+	test->mini = ft_atoi((char *)format);
 	while (ft_isdigit(*format))
-	{
-		//if (*(format - 1) < '1' || '9' < *(format - 1))
-		//	test->mini = ft_atoi((char *)format);
 		format++;
-	}
 	if (*format == '*')
 	{
 		test->mini = va_arg(*ap, int);
@@ -84,7 +78,6 @@ const char	*confirm(const char *format, va_list *ap, t_in *test, size_t *count)
 		test->flag = -1;
 		test->mini *= -1;
 	}
-		
 	return (conf_2(format, ap, test, count));
 }
 
