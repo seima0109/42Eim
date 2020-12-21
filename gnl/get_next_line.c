@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/21 19:03:34 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/21 19:06:00 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	link_line(int fd, char **line, char **save)
 {
 	char *buf;
 	char *tmp_n;
-	char *tmp;
 
 	*line = ft_strdup(*save);
 	if ((buf = malloc(BUFFER_SIZE + 1)) == NULL || fd <= -1)
@@ -91,7 +90,7 @@ int	link_line(int fd, char **line, char **save)
 		}
 		if ((tmp_n = strchr(buf, '\n')))//bufの中に改行があった場合
 		{
-			tmp_n = '\0';
+			*tmp_n = '\0';
 			*line = ft_strjoin(*line, buf);
 			*save = ++tmp_n;
 			free(buf);

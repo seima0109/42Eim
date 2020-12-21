@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:15:23 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/21 18:49:31 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/21 19:05:32 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ft_strdup(const char *str)
 
 char	*ft_strchr(char *str, char c)
 {
-	char	*ans;
+//	char	*ans;
 
 	while (1)
 	{
