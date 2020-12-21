@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/21 18:58:15 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/21 19:03:34 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ int	get_next_line (int fd, char **line)
 		save = ++tmp;
 		return (1);
 	}
-	link_line(fd, line, &save);
+	return (link_line(fd, line, &save));
 }
 
-void	link_line(int fd, char **line, char **save)
+int	link_line(int fd, char **line, char **save)
 {
 	char *buf;
 	char *tmp_n;
