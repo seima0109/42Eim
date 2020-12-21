@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/21 19:48:44 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/21 20:06:54 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	link_line(int fd, char **line, char **save)
 		{
 		//	*line = ft_strjoin(*line, "\0");
 		//	printf("1*line = %s\n", *line);
-			free(buf);
+		//	free(buf);
 			return (0);
 		}
 		if ((tmp_n = ft_strchr(buf, '\n')))//bufの中に改行があった場合
@@ -97,7 +97,7 @@ int	link_line(int fd, char **line, char **save)
 		//	printf("2*line[%s]buf[%s]\n", *line, buf);
 			*line = ft_strjoin(*line, buf);
 			*save = ++tmp_n;
-			free(buf);
+		//	free(buf);
 			return (1);
 		}
 		else
