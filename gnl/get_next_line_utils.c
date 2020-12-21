@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:15:23 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/11/15 23:31:39 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/21 18:49:31 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*ft_strjoin(char *str1, char *str2)
 	while (bsize--)
 		new_str[i++] = *str2++;
 	new_str[i] = '\0';
+	free(new_str);
 	return (new_str);
 }
 
@@ -43,12 +44,13 @@ char	*ft_strdup(const char *str)
 	char	*new_str;
 	int		i;
 
-	if (!(new_str = malloc(ft_strlen(str) + 1)))
+	if (!str || !(new_str = malloc(ft_strlen(str) + 1)))
 		return (NULL);
 	i = 0;
 	while (*str)
 		*(new_str + i++) = *str++;
 	*(new_str + i) = '\0';
+	free(new_str);
 	return (new_str);
 }
 
@@ -60,9 +62,9 @@ char	*ft_strchr(char *str, char c)
 	{
 		if (*str == c)
 		{
-			ans = ft_strdup(str);
-			*str = '\0';
-			return (ans);
+		//	ans = ft_strdup(str);
+		//	*str = '\0';
+			return (str);
 		}
 		if (!*str)
 			return (NULL);

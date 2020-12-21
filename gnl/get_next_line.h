@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 23:26:21 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/11/15 23:26:23 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/21 18:34:13 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char	*ft_strchr(char *str, char c);
 char	*ft_strjoin(char *str1, char *str2);
 char	*ft_strdup(const char *str);
 void	ft_bzero(void *buf, size_t n);
+void	link_line(int fd, char **line, char **save);
 
 #endif

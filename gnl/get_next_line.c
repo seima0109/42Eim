@@ -6,12 +6,12 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/11/15 23:49:03 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/21 18:58:15 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+/*
 int	get_next_line (int fd, char **line)
 {
 	char		*buf;
@@ -54,5 +54,50 @@ int	get_next_line (int fd, char **line)
 		}
 		if ((*line = ft_strjoin(*line, buf)) == NULL)
 			return (-1);
+	}
+}*/
+
+int	get_next_line (int fd, char **line)
+{
+	static char	*save;
+	char		*tmp;
+
+	if (save && (tmp = ft_strchr(save, '\n')))
+	{
+		*tmp = '\0';
+		*line = ft_strdup(save);
+		save = ++tmp;
+		return (1);
+	}
+	link_line(fd, line, &save);
+}
+
+void	link_line(int fd, char **line, char **save)
+{
+	char *buf;
+	char *tmp_n;
+	char *tmp;
+
+	*line = ft_strdup(*save);
+	if ((buf = malloc(BUFFER_SIZE + 1)) == NULL || fd <= -1)
+		return (-1);
+	while (1)
+	{
+		if (!read (fd, buf, BUFFER_SIZE))//readが0ならgnlで0を返す
+		{
+			*line = ft_strjoin(*line, "\0");
+			free(buf);
+			return (0);
+		}
+		if ((tmp_n = strchr(buf, '\n')))//bufの中に改行があった場合
+		{
+			tmp_n = '\0';
+			*line = ft_strjoin(*line, buf);
+			*save = ++tmp_n;
+			free(buf);
+			return (1);
+		}
+		else
+			*line = ft_strjoin(*line, buf);
 	}
 }
