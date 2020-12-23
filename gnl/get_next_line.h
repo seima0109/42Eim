@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 23:26:21 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/21 19:03:32 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/23 19:07:25 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
 # endif
+# define FREE_AND_NULL(ptr) {free(*ptr); *ptr = NULL;}
 
 int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(char *str, char c);
 char	*ft_strjoin(char *str1, char *str2);
 char	*ft_strdup(const char *str);
-void	ft_bzero(void *buf, size_t n);
-int		link_line(int fd, char **line, char **save);
+int		read_buf(int fd, char **line, char **save);
+int		create_line(char **line, char *buf, char **save);
 
 #endif

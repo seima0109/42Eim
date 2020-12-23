@@ -6,33 +6,48 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:15:23 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/21 19:47:48 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/23 19:20:34 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+/*
+char	*ft_strnjoin(char *str1, char *str2, size_t len_2)
+{
+	char	*new_str;
+	int		i;
+	size_t	len_1;
 
+	len_1 = str1 ? ft_strlen(str1) : 0;
+	if (!str1 && !str2)
+		return (NULL);
+	i = 0;
+	if (!(new_str = malloc(len_1 + len_2 + 1)))
+		return (NULL);	
+	while (len_1--)
+		new_str[i++] = *str1++;
+	while (len_2--)
+		new_str[i++] = *str2++;
+	new_str[i] = '\0';
+	return (new_str);
+}*/
 char	*ft_strjoin(char *str1, char *str2)
 {
 	char	*new_str;
 	int		i;
-	int		bsize;
 	size_t	len_1;
-
-	len_1 = 0;
-//	printf("*line = %s\n",str1);
-	if (str1)
-		len_1 = ft_strlen(str1);
+	size_t	len_2;
+	
+	len_1 = str1 ? ft_strlen(str1) : 0;
+	len_2 = str2 ? ft_strlen(str2) : 0;
 	if (!str1 && !str2)
 		return (NULL);
 	i = 0;
-//	printf("len1 = %zu ",len_1);
-	if (!(new_str = malloc(len_1 + BUFFER_SIZE + 1)))
+	if (!(new_str = malloc(len_1 + len_2 + 1)))
 		return (NULL);	
 	while (len_1--)
 		new_str[i++] = *str1++;
-	bsize = BUFFER_SIZE;
-	while (bsize--)
+	while (len_2--)
 		new_str[i++] = *str2++;
 	new_str[i] = '\0';
 	return (new_str);
@@ -43,7 +58,7 @@ char	*ft_strdup(const char *str)
 	char	*new_str;
 	int		i;
 
-	if (!str || !(new_str = malloc(ft_strlen(str) + 1)))
+	if (!(new_str = malloc(ft_strlen(str) + 1)))
 		return (NULL);
 	i = 0;
 	while (*str)
@@ -51,19 +66,33 @@ char	*ft_strdup(const char *str)
 	*(new_str + i) = '\0';
 	return (new_str);
 }
+/*
+int		ft_strchr_len(char *str, char c)
+{
+	int	len;
 
+	if (!str)
+		return (0);
+	len = 0;
+	while (*str && *str != c)
+	{
+		str++;
+		len++;
+	}
+	return (len);
+}
+*/
 char	*ft_strchr(char *str, char c)
 {
-//	char	*ans;
+	int	len;
 
+	if (!str)
+		return (0);
+	len = 0;
 	while (1)
 	{
 		if (*str == c)
-		{
-		//	ans = ft_strdup(str);
-		//	*str = '\0';
 			return (str);
-		}
 		if (!*str)
 			return (NULL);
 		str++;
@@ -80,11 +109,23 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-void	ft_bzero(void *buf, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned char *p;
+	char	*str;
+	size_t	i;
 
-	p = (unsigned char *)buf;
-	while (n--)
-		*p++ = '\0';
+	if (!s)
+		return (NULL);
+	if (ft_strlen(s) <= start)
+		return (ft_strdup("\0"));
+	i = 0;
+	if (!(str = (char *)malloc((len - start + 1) * sizeof(char))))
+		return (NULL);
+	while (i < len && s[start + i])
+	{
+		str[i] = s[start + i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
