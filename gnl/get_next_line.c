@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/23 20:13:59 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/23 20:19:52 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	read_buf(int fd, char **line, char **save)
 	}
 //	printf("cnt = [%d]", cnt);
 	buf[cnt] = '\0';
-	ft_strjoin(*line, buf);
+	*line = ft_strdup("\0");
 //	printf("before save(read_buf) free\n");
 	FREE_AND_NULL(save);
 	FREE_AND_NULL(&buf);
