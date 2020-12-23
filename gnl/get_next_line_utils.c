@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:15:23 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/23 19:20:34 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/23 20:45:07 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ size_t	ft_strlen(const char *str)
 		len++;
 	return (len);
 }
+
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
