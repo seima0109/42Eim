@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/23 20:09:38 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/23 20:13:59 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	read_buf(int fd, char **line, char **save)
 {
 	int		cnt;
 	char	*buf;
-	char	*new_line;
 	int		res;
 
 //	write(1, "===read buf===\n", 15);
@@ -89,7 +88,6 @@ int	check_save(char **save, char **line)
 {
 	char	*tmp;
 	char	*new_line;
-	int		ret;
 
 //	write(1, "===check save===", 16);
 	tmp = ft_strdup(*save);
@@ -112,7 +110,6 @@ int	get_next_line(int fd, char **line)
 {
 	static char	*save;
 	int			ret;
-	char		*tmp;
 
 //	printf("in gnl\n");
 	if ((BUFFER_SIZE <= 0) || fd < 0 || 255 < fd 
