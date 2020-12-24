@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:15:23 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/24 14:01:11 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/24 14:04:22 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ char	*ft_strjoin(char *str1, char *str2)
 	int		i;
 	size_t	len_1;
 	size_t	len_2;
-	
+
 	len_1 = str1 ? ft_strlen(str1) : 0;
 	len_2 = str2 ? ft_strlen(str2) : 0;
 	if (!str1 && !str2)
 		return (NULL);
 	i = 0;
 	if (!(new_str = malloc(len_1 + len_2 + 1)))
-		return (NULL);	
+		return (NULL);
 	while (len_1--)
 		new_str[i++] = *str1++;
 	while (len_2--)
@@ -74,7 +74,6 @@ size_t	ft_strlen(const char *str)
 		len++;
 	return (len);
 }
-
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

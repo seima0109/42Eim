@@ -6,12 +6,12 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 23:26:21 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/24 14:01:17 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/24 14:02:34 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <string.h>
 # include <unistd.h>
