@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/24 13:56:13 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/24 13:59:54 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ int	get_next_line(int fd, char **line)
 	static char	*save;
 	int			ret;
 
-	if ((BUFFER_SIZE <= 0) || fd < 0 || 255 < fd 
+	if ((BUFFER_SIZE <= 0) || fd < 0 || 255 < fd
 	|| !line || !(*line = ft_strdup("")))
 		return (-1);
 	ret = 0;
 	if (!save)
 	{
-		if (!(save =  ft_strdup("")))
+		if (!(save = ft_strdup("")))
 			return (-1);
 	}
 	else
