@@ -6,13 +6,13 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/24 16:11:11 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/24 16:13:12 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	erro_free_all(char **line, char **buf, char **save)
+int	error_free_all(char **line, char **buf, char **save)
 {
 	FREE_AND_NULL(buf);
 	FREE_AND_NULL(line);
