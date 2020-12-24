@@ -6,12 +6,19 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/24 15:49:23 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/24 16:09:53 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <unistd.h>
+
+int	erro_free_all(char **line , char **buf, char **save)
+{
+	FREE_AND_NULL(buf);
+	FREE_AND_NULL(line);
+	FREE_AND_NULL(save);
+	return (-1);
+}
 
 int	create_line(char **line, char *buf, char **save)
 {
@@ -21,19 +28,19 @@ int	create_line(char **line, char *buf, char **save)
 	if (!(new_line = ft_strchr(buf, '\n')))
 	{
 		if (!(tmp = ft_strjoin(*line, buf)))
-			return (-1);
+			return (error_free_all(line, &buf, save));
 		FREE_AND_NULL(line);
 		*line = tmp;
 		return (0);
 	}
 	*new_line = '\0';
 	if (!(tmp = ft_strjoin(*line, buf)))
-		return (-1);
+		return (error_free_all(line, &buf, save));
 	FREE_AND_NULL(line);
 	*line = tmp;
 	FREE_AND_NULL(save);
 	if (!(*save = ft_strdup(new_line + 1)))
-		return (-1);
+		return (error_free_all(line, &buf, save));
 	return (1);
 }
 
@@ -44,16 +51,11 @@ int	read_buf(int fd, char **line, char **save)
 	int		res;
 
 	if (!(buf = malloc(BUFFER_SIZE + 1)))
-		return (-1);
+		return (error_free_all(line, NULL, save));
 	while ((cnt = read(fd, buf, BUFFER_SIZE)))
 	{
 		if (cnt == -1)
-		{
-			FREE_AND_NULL(&buf);
-			FREE_AND_NULL(line);
-			FREE_AND_NULL(save);
-			return (-1);
-		}
+			return (error_free_all(line, &buf, save));
 		buf[cnt] = '\0';
 		if ((res = create_line(line, buf, save)) != 0)
 		{
@@ -73,20 +75,22 @@ int	check_save(char **save, char **line)
 	char	*new_line;
 
 	if (!(tmp = ft_strdup(*save)))
-		return (-1);
+		return (error_free_all(line, NULL, save));
 	if ((new_line = ft_strchr(tmp, '\n')))
 	{
 		*new_line = '\0';
 		FREE_AND_NULL(line);
-		*line = ft_strdup(tmp);
+		if (!(*line = ft_strdup(tmp)))
+			return (error_free_all(line, NULL, save));
 		FREE_AND_NULL(save);
-		*save = ft_strdup(new_line + 1);
+		if (!(*save = ft_strdup(new_line + 1)))
+			return (error_free_all(line, NULL, save));
 		FREE_AND_NULL(&tmp);
 		return (1);
 	}
 	FREE_AND_NULL(line);
 	if (!(*line = ft_strdup(*save)))
-		return (-1);
+		return (error_free_all(line, NULL, save));
 	FREE_AND_NULL(save);
 	FREE_AND_NULL(&tmp);
 	return (0);
@@ -100,12 +104,11 @@ int	get_next_line(int fd, char **line)
 	if ((BUFFER_SIZE <= 0) || fd < 0 || 255 < fd
 	|| !line || !(*line = ft_strdup("")))
 		return (-1);
-	write(1,"1",1);
 	ret = 0;
 	if (!save)
 	{
 		if (!(save = ft_strdup("")))
-			return (-1);
+			return (error_free_all(line, NULL, NULL));
 	}
 	else
 		ret = check_save(&save, line);
