@@ -6,7 +6,7 @@
 /*   By: stomonoh <stomonoh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 14:16:16 by stomonoh          #+#    #+#             */
-/*   Updated: 2020/12/23 23:55:43 by stomonoh         ###   ########.fr       */
+/*   Updated: 2020/12/24 13:56:13 by stomonoh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,25 @@ int	read_buf(int fd, char **line, char **save)
 
 int	check_save(char **save, char **line)
 {
-	char	*tmp;//
+	char	*tmp;
 	char	*new_line;
 
 	tmp = ft_strdup(*save);
 	if ((new_line = ft_strchr(tmp, '\n')))
 	{
 		*new_line = '\0';
-		FREE_AND_NULL(line);//
+		FREE_AND_NULL(line);
 		*line = ft_strdup(tmp);
-		FREE_AND_NULL(save);//
+		FREE_AND_NULL(save);
 		*save = ft_strdup(new_line + 1);
-		FREE_AND_NULL(&tmp);//
+		FREE_AND_NULL(&tmp);
 		return (1);
 	}
-	FREE_AND_NULL(line);//
+	FREE_AND_NULL(line);
 	if (!(*line = ft_strdup(*save)))
 		return (-1);
-	FREE_AND_NULL(save);//
-	FREE_AND_NULL(&tmp);//
+	FREE_AND_NULL(save);
+	FREE_AND_NULL(&tmp);
 	return (0);
 }
 
@@ -94,12 +94,12 @@ int	get_next_line(int fd, char **line)
 	int			ret;
 
 	if ((BUFFER_SIZE <= 0) || fd < 0 || 255 < fd 
-	|| !line || !(*line = ft_strdup("")))//
+	|| !line || !(*line = ft_strdup("")))
 		return (-1);
 	ret = 0;
 	if (!save)
 	{
-		if (!(save =  ft_strdup("")))//
+		if (!(save =  ft_strdup("")))
 			return (-1);
 	}
 	else
